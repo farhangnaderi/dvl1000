@@ -113,7 +113,7 @@ try:
 			
 			
 			#----------Print Data---------
-			print("id: " + str(BottomID) + ". Mode: " + BottomMode + ". Status: " + BottomStatus + ". Time: " + BottomTime)
+			print("ID: " + str(BottomID) + ". Mode: " + BottomMode + ". Status: " + BottomStatus + ". Time: " + BottomTime)
 			
 			#Speed of sound
 			print("Speed of Sound(" + str(BottomSpeedOfSoundMin) + " - " + str(BottomSpeedOfSoundMax) + "): " + str(BottomSpeedOfSoundData) + " " + BottomSpeedOfSoundUnit)
@@ -140,6 +140,129 @@ try:
 			print("XYZ FOM(" + str(BottomXyzFomMin) + " - " + str(BottomXyzFomMax) + "): " + "1[" + str(BottomXyzFom1Valid) + "]:" + str(BottomXyzFom1Data) + " 2[" + str(BottomXyzFom2Valid) + "]:" + str(BottomXyzFom2Data) + " 3[" + str(BottomXyzFom3Valid) + "]:" + str(BottomXyzFom3Data) + " 4[" + str(BottomXyzFom4Valid) + "]:" + str(BottomXyzFom4Data) + " Unit: " + BottomXyzFomUnit)
 			
 			print(" ")
+			
+		if theData["id"] == 8221:
+			#Parsing Variables
+			WaterID = theData["id"]
+			WaterMode = theData["name"]
+			WaterTime = theData["timeStampStr"]
+			WaterStatus = theData["frames"][1]["inputs"][0]["lines"][0]["data"][0]
+			
+			#Speed of Sound variables
+			WaterSpeedOfSoundMin = theData["frames"][2]["inputs"][0]["min"]
+			WaterSpeedOfSoundMax = theData["frames"][2]["inputs"][0]["max"]
+			WaterSpeedOfSoundUnit = theData["frames"][2]["inputs"][0]["units"]
+			WaterSpeedOfSoundData = theData["frames"][2]["inputs"][0]["lines"][0]["data"][0]
+			
+			#Temperature varliables
+			WaterTempMin = theData["frames"][3]["inputs"][0]["min"]
+			WaterTempMax = theData["frames"][3]["inputs"][0]["max"]
+			WaterTempUnit = theData["frames"][3]["inputs"][0]["units"]
+			WaterTempData = theData["frames"][3]["inputs"][0]["lines"][0]["data"][0]
+			
+			#Pressure variables
+			WaterPressureName = theData["frames"][4]["inputs"][0]["name"]
+			WaterPressureMin = theData["frames"][4]["inputs"][0]["min"]
+			WaterPressureMax = theData["frames"][4]["inputs"][0]["max"]
+			WaterPressureData = theData["frames"][4]["inputs"][0]["lines"][0]["data"][0]
+			WaterPressureUnit = theData["frames"][4]["inputs"][0]["units"]
+			
+			#Beam Velocity Variables
+			WaterBeamVelMin = theData["frames"][5]["inputs"][0]["min"]
+			WaterBeamVelMax = theData["frames"][5]["inputs"][0]["max"]
+			WaterBeamVelUnit = theData["frames"][5]["inputs"][0]["units"]
+			WaterBeamVel1Data = theData["frames"][5]["inputs"][0]["lines"][0]["data"][0]
+			WaterBeamVel2Data = theData["frames"][5]["inputs"][0]["lines"][1]["data"][0]
+			WaterBeamVel3Data = theData["frames"][5]["inputs"][0]["lines"][2]["data"][0]
+			WaterBeamVel4Data = theData["frames"][5]["inputs"][0]["lines"][3]["data"][0]
+			WaterBeamVel1Valid = theData["frames"][5]["inputs"][0]["lines"][0]["valid"]
+			WaterBeamVel2Valid = theData["frames"][5]["inputs"][0]["lines"][1]["valid"]
+			WaterBeamVel3Valid = theData["frames"][5]["inputs"][0]["lines"][2]["valid"]
+			WaterBeamVel4Valid = theData["frames"][5]["inputs"][0]["lines"][3]["valid"]
+			
+			#Beam FOM Variables
+			WaterBeamFomMin = theData["frames"][5]["inputs"][1]["min"]
+			WaterBeamFomMax = theData["frames"][5]["inputs"][1]["max"]
+			WaterBeamFomUnit = theData["frames"][5]["inputs"][1]["units"]
+			WaterBeamFom1Data = theData["frames"][5]["inputs"][1]["lines"][0]["data"][0]
+			WaterBeamFom2Data = theData["frames"][5]["inputs"][1]["lines"][1]["data"][0]
+			WaterBeamFom3Data = theData["frames"][5]["inputs"][1]["lines"][2]["data"][0]
+			WaterBeamFom4Data = theData["frames"][5]["inputs"][1]["lines"][3]["data"][0]
+			WaterBeamFom1Valid = theData["frames"][5]["inputs"][1]["lines"][0]["valid"]
+			WaterBeamFom2Valid = theData["frames"][5]["inputs"][1]["lines"][1]["valid"]
+			WaterBeamFom3Valid = theData["frames"][5]["inputs"][1]["lines"][2]["valid"]
+			WaterBeamFom4Valid = theData["frames"][5]["inputs"][1]["lines"][3]["valid"]
+			
+			#Beam Dist Variables
+			WaterBeamDistMin = theData["frames"][5]["inputs"][2]["min"]
+			WaterBeamDistMax = theData["frames"][5]["inputs"][2]["max"]
+			WaterBeamDistUnit = theData["frames"][5]["inputs"][2]["units"]
+			WaterBeamDist1Data = theData["frames"][5]["inputs"][2]["lines"][0]["data"][0]
+			WaterBeamDist2Data = theData["frames"][5]["inputs"][2]["lines"][1]["data"][0]
+			WaterBeamDist3Data = theData["frames"][5]["inputs"][2]["lines"][2]["data"][0]
+			WaterBeamDist4Data = theData["frames"][5]["inputs"][2]["lines"][3]["data"][0]
+			WaterBeamDist1Valid = theData["frames"][5]["inputs"][2]["lines"][0]["valid"]
+			WaterBeamDist2Valid = theData["frames"][5]["inputs"][2]["lines"][1]["valid"]
+			WaterBeamDist3Valid = theData["frames"][5]["inputs"][2]["lines"][2]["valid"]
+			WaterBeamDist4Valid = theData["frames"][5]["inputs"][2]["lines"][3]["valid"]
+			
+			#XYZ Velocity Variables
+			WaterXyzVelMin = theData["frames"][6]["inputs"][0]["min"]
+			WaterXyzVelMax = theData["frames"][6]["inputs"][0]["max"]
+			WaterXyzVelUnit = theData["frames"][6]["inputs"][0]["units"]
+			WaterXyzVel1Data = theData["frames"][6]["inputs"][0]["lines"][0]["data"][0]
+			WaterXyzVel2Data = theData["frames"][6]["inputs"][0]["lines"][1]["data"][0]
+			WaterXyzVel3Data = theData["frames"][6]["inputs"][0]["lines"][2]["data"][0]
+			WaterXyzVel4Data = theData["frames"][6]["inputs"][0]["lines"][3]["data"][0]
+			WaterXyzVel1Valid = theData["frames"][6]["inputs"][0]["lines"][0]["valid"]
+			WaterXyzVel2Valid = theData["frames"][6]["inputs"][0]["lines"][1]["valid"]
+			WaterXyzVel3Valid = theData["frames"][6]["inputs"][0]["lines"][2]["valid"]
+			WaterXyzVel4Valid = theData["frames"][6]["inputs"][0]["lines"][3]["valid"]
+			
+			#XYZ FOM Variables
+			WaterXyzFomMin = theData["frames"][6]["inputs"][1]["min"]
+			WaterXyzFomMax = theData["frames"][6]["inputs"][1]["max"]
+			WaterXyzFomUnit = theData["frames"][6]["inputs"][1]["units"]
+			WaterXyzFom1Data = theData["frames"][6]["inputs"][1]["lines"][0]["data"][0]
+			WaterXyzFom2Data = theData["frames"][6]["inputs"][1]["lines"][1]["data"][0]
+			WaterXyzFom3Data = theData["frames"][6]["inputs"][1]["lines"][2]["data"][0]
+			WaterXyzFom4Data = theData["frames"][6]["inputs"][1]["lines"][3]["data"][0]
+			WaterXyzFom1Valid = theData["frames"][6]["inputs"][1]["lines"][0]["valid"]
+			WaterXyzFom2Valid = theData["frames"][6]["inputs"][1]["lines"][1]["valid"]
+			WaterXyzFom3Valid = theData["frames"][6]["inputs"][1]["lines"][2]["valid"]
+			WaterXyzFom4Valid = theData["frames"][6]["inputs"][1]["lines"][3]["valid"]
+			
+			
+			#----------Print Data---------
+			print("ID: " + str(WaterID) + ". Mode: " + WaterMode + ". Status: " + WaterStatus + ". Time: " + WaterTime)
+			
+			#Speed of sound
+			print("Speed of Sound(" + str(WaterSpeedOfSoundMin) + " - " + str(WaterSpeedOfSoundMax) + "): " + str(WaterSpeedOfSoundData) + " " + WaterSpeedOfSoundUnit)
+			
+			#Temperature
+			print("Temperature(" + str(WaterTempMin) + " - " + str(WaterTempMax) + "): " + str(WaterTempData) + " " + WaterTempUnit)
+			
+			#Pressure
+			print(WaterPressureName + "(" + str(WaterPressureMin) + " - " + str(WaterPressureMax) + ")" + ": " + str(WaterPressureData) + " " + WaterPressureUnit)
+			
+			#Beam Velocity
+			print("Beam Velocity(" + str(WaterBeamVelMin) + " - " + str(WaterBeamVelMax) + "): " + "1[" + str(WaterBeamVel1Valid) + "]:" + str(WaterBeamVel1Data) + " 2[" + str(WaterBeamVel2Valid) + "]:" + str(WaterBeamVel2Data) + " 3[" + str(WaterBeamVel3Valid) + "]:" + str(WaterBeamVel3Data) + " 4[" + str(WaterBeamVel4Valid) + "]:" + str(WaterBeamVel4Data) + " Unit: " + WaterBeamVelUnit)
+			
+			#Beam FOM
+			print("Beam FOM(" + str(WaterBeamFomMin) + " - " + str(WaterBeamFomMax) + "): " + "1[" + str(WaterBeamFom1Valid) + "]:" + str(WaterBeamFom1Data) + " 2[" + str(WaterBeamFom2Valid) + "]:" + str(WaterBeamFom2Data) + " 3[" + str(WaterBeamFom3Valid) + "]:" + str(WaterBeamFom3Data) + " 4[" + str(WaterBeamFom4Valid) + "]:" + str(WaterBeamFom4Data))
+			
+			#Beam Dist
+			print("Beam Dist(" + str(WaterBeamDistMin) + " - " + str(WaterBeamDistMax) + "): " + "1[" + str(WaterBeamDist1Valid) + "]:" + str(WaterBeamDist1Data) + " 2[" + str(WaterBeamDist2Valid) + "]:" + str(WaterBeamDist2Data) + " 3[" + str(WaterBeamDist3Valid) + "]:" + str(WaterBeamDist3Data) + " 4[" + str(WaterBeamDist4Valid) + "]:" + str(WaterBeamDist4Data) + " Unit: " + WaterBeamDistUnit)
+			
+			#XYZ Velocity
+			print("XYZ Velocity(" + str(WaterXyzVelMin) + " - " + str(WaterXyzVelMax) + "): " + "1[" + str(WaterXyzVel1Valid) + "]:" + str(WaterXyzVel1Data) + " 2[" + str(WaterXyzVel2Valid) + "]:" + str(WaterXyzVel2Data) + " 3[" + str(WaterXyzVel3Valid) + "]:" + str(WaterXyzVel3Data) + " 4[" + str(WaterXyzVel4Valid) + "]:" + str(WaterXyzVel4Data) + " Unit: " + WaterXyzVelUnit)
+			
+			#XYZ FOM
+			print("XYZ FOM(" + str(WaterXyzFomMin) + " - " + str(WaterXyzFomMax) + "): " + "1[" + str(WaterXyzFom1Valid) + "]:" + str(WaterXyzFom1Data) + " 2[" + str(WaterXyzFom2Valid) + "]:" + str(WaterXyzFom2Data) + " 3[" + str(WaterXyzFom3Valid) + "]:" + str(WaterXyzFom3Data) + " 4[" + str(WaterXyzFom4Valid) + "]:" + str(WaterXyzFom4Data) + " Unit: " + WaterXyzFomUnit)
+			
+			print("------")
+			print(" ")
+			
 		
 		time.sleep(0.005)
 except KeyboardInterrupt:
