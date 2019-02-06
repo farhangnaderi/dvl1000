@@ -2,6 +2,7 @@ import json
 import time
 from websocket import create_connection
 
+#Websocket connection stuff. Make sure the websocket-client python library is installed.
 ws = create_connection("ws://10.42.0.96:10100", subprotocols=["data-transfer-nortek"])
 print("Connecting to DVL1000 via websocket...")
 result = ws.recv()
@@ -10,22 +11,15 @@ print("Status: '%s'" % result)
 try:
 	while True:
 		result = ws.recv()
-		#print("Received '%s'" % result)
 
-		#Parsing json
+		#Get JSON Data
 		theData = json.loads(result)
 		
 		#Alternating data each time data is recieved. Each with unique ID(4123 and 8219) and dataset. Using IF to sort this out
 		#8219 seem to have additional information like Status, Speed of Sound, Temperature
-		#More data if more modes of tracking is turned on IDs 4125 and 8221 belongs to Water Tracking mode.
+		#More data if more modes of tracking is turned on. IDs 4125 and 8221 belongs to Water Tracking mode.
 		#IDs 4123 and 8219 belongs to Bottom Track mode.
-		'''
-		if theData["id"] == 4123:
-			print("id: " + str(theData["id"]) + " Mode: " + theData["name"] + " time: " + theData["timeStampStr"])
-
-			#Pressure
-			print(theData["frames"][0]["inputs"][0]["name"] + "(" + str(theData["frames"][0]["inputs"][0]["min"]) + " - " + str(theData["frames"][0]["inputs"][0]["max"]) + ")" + ": " + str(theData["frames"][0]["inputs"][0]["lines"][0]["data"][0]) + " " + theData["frames"][0]["inputs"][0]["units"])
-		'''	
+		
 		if theData["id"] == 8219:
 			#Parsing Variables
 			BottomID = theData["id"]
@@ -91,6 +85,32 @@ try:
 			BottomBeamDist3Valid = theData["frames"][5]["inputs"][2]["lines"][2]["valid"]
 			BottomBeamDist4Valid = theData["frames"][5]["inputs"][2]["lines"][3]["valid"]
 			
+			#XYZ Velocity Variables
+			BottomXyzVelMin = theData["frames"][6]["inputs"][0]["min"]
+			BottomXyzVelMax = theData["frames"][6]["inputs"][0]["max"]
+			BottomXyzVelUnit = theData["frames"][6]["inputs"][0]["units"]
+			BottomXyzVel1Data = theData["frames"][6]["inputs"][0]["lines"][0]["data"][0]
+			BottomXyzVel2Data = theData["frames"][6]["inputs"][0]["lines"][1]["data"][0]
+			BottomXyzVel3Data = theData["frames"][6]["inputs"][0]["lines"][2]["data"][0]
+			BottomXyzVel4Data = theData["frames"][6]["inputs"][0]["lines"][3]["data"][0]
+			BottomXyzVel1Valid = theData["frames"][6]["inputs"][0]["lines"][0]["valid"]
+			BottomXyzVel2Valid = theData["frames"][6]["inputs"][0]["lines"][1]["valid"]
+			BottomXyzVel3Valid = theData["frames"][6]["inputs"][0]["lines"][2]["valid"]
+			BottomXyzVel4Valid = theData["frames"][6]["inputs"][0]["lines"][3]["valid"]
+			
+			#XYZ FOM Variables
+			BottomXyzFomMin = theData["frames"][6]["inputs"][1]["min"]
+			BottomXyzFomMax = theData["frames"][6]["inputs"][1]["max"]
+			BottomXyzFomUnit = theData["frames"][6]["inputs"][1]["units"]
+			BottomXyzFom1Data = theData["frames"][6]["inputs"][1]["lines"][0]["data"][0]
+			BottomXyzFom2Data = theData["frames"][6]["inputs"][1]["lines"][1]["data"][0]
+			BottomXyzFom3Data = theData["frames"][6]["inputs"][1]["lines"][2]["data"][0]
+			BottomXyzFom4Data = theData["frames"][6]["inputs"][1]["lines"][3]["data"][0]
+			BottomXyzFom1Valid = theData["frames"][6]["inputs"][1]["lines"][0]["valid"]
+			BottomXyzFom2Valid = theData["frames"][6]["inputs"][1]["lines"][1]["valid"]
+			BottomXyzFom3Valid = theData["frames"][6]["inputs"][1]["lines"][2]["valid"]
+			BottomXyzFom4Valid = theData["frames"][6]["inputs"][1]["lines"][3]["valid"]
+			
 			
 			#----------Print Data---------
 			print("id: " + str(BottomID) + ". Mode: " + BottomMode + ". Status: " + BottomStatus + ". Time: " + BottomTime)
@@ -112,6 +132,12 @@ try:
 			
 			#Beam Dist
 			print("Beam Dist(" + str(BottomBeamDistMin) + " - " + str(BottomBeamDistMax) + "): " + "1[" + str(BottomBeamDist1Valid) + "]:" + str(BottomBeamDist1Data) + " 2[" + str(BottomBeamDist2Valid) + "]:" + str(BottomBeamDist2Data) + " 3[" + str(BottomBeamDist3Valid) + "]:" + str(BottomBeamDist3Data) + " 4[" + str(BottomBeamDist4Valid) + "]:" + str(BottomBeamDist4Data) + " Unit: " + BottomBeamDistUnit)
+			
+			#XYZ Velocity
+			print("XYZ Velocity(" + str(BottomXyzVelMin) + " - " + str(BottomXyzVelMax) + "): " + "1[" + str(BottomXyzVel1Valid) + "]:" + str(BottomXyzVel1Data) + " 2[" + str(BottomXyzVel2Valid) + "]:" + str(BottomXyzVel2Data) + " 3[" + str(BottomXyzVel3Valid) + "]:" + str(BottomXyzVel3Data) + " 4[" + str(BottomXyzVel4Valid) + "]:" + str(BottomXyzVel4Data) + " Unit: " + BottomXyzVelUnit)
+			
+			#XYZ FOM
+			print("XYZ FOM(" + str(BottomXyzFomMin) + " - " + str(BottomXyzFomMax) + "): " + "1[" + str(BottomXyzFom1Valid) + "]:" + str(BottomXyzFom1Data) + " 2[" + str(BottomXyzFom2Valid) + "]:" + str(BottomXyzFom2Data) + " 3[" + str(BottomXyzFom3Valid) + "]:" + str(BottomXyzFom3Data) + " 4[" + str(BottomXyzFom4Valid) + "]:" + str(BottomXyzFom4Data) + " Unit: " + BottomXyzFomUnit)
 			
 			print(" ")
 		
