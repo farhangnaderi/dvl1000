@@ -1,9 +1,10 @@
 # DVL1000
 Python Script to read data from the Nortek DVL1000
 
-##Installation
+## Installation
 Install the websocket-client library for your python workspace.
 If you have pip installed use:
+
 `pip install websocket-client`
 
 Else:
@@ -15,7 +16,7 @@ Else:
 
 Download the master.py script
 
-##Usage
+## Usage
 Make sure you remebered to update the IP adress in the script, so that it points to the DVL
 Run the script using:
 
