@@ -14,10 +14,10 @@ Else:
 
     python setup.py install
 
-Download the master.py script
+Once the library is ready, download the master.py script
 
 ## Usage
-Make sure you remebered to update the IP adress in the script, so that it points to the DVL
+Make sure you remebered to update the IP adress in the script, so that it points to the DVL.
 Run the script using:
 
     python master.py
